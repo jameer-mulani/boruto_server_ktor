@@ -2,6 +2,7 @@
 val ktorVersion: String by project
 val kotlinVersion: String by project
 val logbackVersion: String by project
+val koinKtor:String by project
 
 plugins {
     kotlin("jvm") version "1.9.0"
@@ -30,6 +31,15 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
+
+    // Koin for Ktor
+    implementation("io.insert-koin:koin-ktor:$koinKtor")
+    // SLF4J Logger(Required for Koin-ktor)
+    implementation("io.insert-koin:koin-logger-slf4j:$koinKtor")
+
+    //Default header plugin
+    implementation("io.ktor:ktor-server-default-headers:$ktorVersion")
+
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 }

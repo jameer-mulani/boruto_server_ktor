@@ -7,8 +7,13 @@ fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
 }
 
+@Suppress("unused")
 fun Application.module() {
-    configureSerialization()
-    configureMonitoring()
+
+    //koin must be the first one to call
+    configureKoin()
+    configureSerialization() //content-negotiation
+    configureMonitoring()    //call logging
     configureRouting()
+    configureDefaultHeaders()
 }
