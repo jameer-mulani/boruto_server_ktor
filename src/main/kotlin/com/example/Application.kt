@@ -16,4 +16,5 @@ fun Application.module() {
     configureMonitoring()    //call logging
     configureRouting()
     configureDefaultHeaders()
+    configureStatusPages()
 }

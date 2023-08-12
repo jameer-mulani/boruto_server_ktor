@@ -40,6 +40,10 @@ dependencies {
     //Default header plugin
     implementation("io.ktor:ktor-server-default-headers:$ktorVersion")
 
+    //status pages
+    implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
+
+
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 }
