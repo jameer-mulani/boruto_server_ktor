@@ -445,6 +445,10 @@ class HeroRepositoryImpl : HeroRepository {
 
     private fun findHeroes(title: String): List<Hero> {
         val searchedResults = mutableListOf<Hero>()
+
+        if (title.isEmpty())
+            return searchedResults
+
         heroes.forEach { (_, heroes) ->
             heroes.forEach {hero->
                 if (hero.name.toLowerCasePreservingASCIIRules().contains(title.toLowerCasePreservingASCIIRules())){
