@@ -71,6 +71,33 @@ class ApplicationTest {
     }
 
     @Test
+    fun `when page index 1 then prevPage in AllPageRoute should be null`() = testApplication {
+        val response = client.get("/boruto/heroes?page=1")
+        val apiResponse = Json.decodeFromString<ApiResponse>(response.bodyAsText())
+        assertEquals(true, apiResponse.prevPage == null)
+    }
+
+    @Test
+    fun `when page index 5 then nextPage in AllPageRoute should be null`() = testApplication {
+        val response = client.get("/boruto/heroes?page=5")
+        val apiResponse = Json.decodeFromString<ApiResponse>(response.bodyAsText())
+        assertEquals(true, apiResponse.nextPage == null)
+    }
+
+    @Test
+    fun `when page index is in valida range then nextPage & prevPage in AllPageRoute should be greater and less than one respectively`() = testApplication {
+
+        val givenIndex = 3
+        val expectedPrevPageIndex = 2
+        val expectedNextPageIndex = 4
+
+        val response = client.get("/boruto/heroes?page=$givenIndex")
+        val apiResponse = Json.decodeFromString<ApiResponse>(response.bodyAsText())
+        assert(apiResponse.prevPage == expectedPrevPageIndex)
+        assert(apiResponse.nextPage == expectedNextPageIndex)
+    }
+
+    @Test
     fun `when no search value then SearchHero route should return empty list`()= testApplication {
         val response = client.get("/boruto/heroes/search")
         val resultApiResponse = Json.decodeFromString<ApiResponse>(response.bodyAsText())
